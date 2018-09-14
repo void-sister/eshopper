@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'IndexPageController@index')->name('index');
+
+Route::get('/shop', 'ShopController@index')->name('shop.index');
+Route::get('/shop/{product}', 'ShopController@show')->name('shop.show');
 
 
 Route::get('/blog-single', function () {
@@ -33,10 +34,4 @@ Route::get('/contact-us', function () {
 });
 Route::get('/login', function () {
     return view('login');
-});
-Route::get('/product-details', function () {
-    return view('product-details');
-});
-Route::get('/shop', function () {
-    return view('shop');
 });
