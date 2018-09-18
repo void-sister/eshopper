@@ -16,7 +16,6 @@
               <li><a href=""><i class="fa fa-facebook"></i></a></li>
               <li><a href=""><i class="fa fa-twitter"></i></a></li>
               <li><a href=""><i class="fa fa-linkedin"></i></a></li>
-              <li><a href=""><i class="fa fa-dribbble"></i></a></li>
               <li><a href=""><i class="fa fa-google-plus"></i></a></li>
             </ul>
           </div>
@@ -30,7 +29,7 @@
       <div class="row">
         <div class="col-sm-4">
           <div class="logo pull-left">
-            <a href="index.html"><img src="{{ URL::asset('images/home/logo.png') }} " alt="" /></a>
+            <a href="{{ route('index') }}"><img src="{{ URL::asset('images/home/logo.png') }} " alt="" /></a>
           </div>
           <div class="btn-group pull-right">
             <div class="btn-group">
@@ -85,22 +84,9 @@
           </div>
           <div class="mainmenu pull-left">
             <ul class="nav navbar-nav collapse navbar-collapse">
-              <li><a href="index.html">Home</a></li>
-              <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
-                <ul role="menu" class="sub-menu">
-                  <li><a href="shop.html">Products</a></li>
-                  <li><a href="product-details.html">Product Details</a></li>
-                  <li><a href="checkout.html" class="active">Checkout</a></li>
-                  <li><a href="cart.html">Cart</a></li>
-                  <li><a href="login.html">Login</a></li>
-                </ul>
-              </li>
-              <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                <ul role="menu" class="sub-menu">
-                  <li><a href="blog.html">Blog List</a></li>
-                  <li><a href="blog-single.html">Blog Single</a></li>
-                </ul>
-              </li>
+              <li><a href="{{ route('index') }}">Home</a></li>
+              <li><a href="{{ route('shop.index') }}">Shop</a></li>
+              <li><a href="#">Blog</a></li>
               <li><a href="contact-us.html">Contact</a></li>
             </ul>
           </div>
