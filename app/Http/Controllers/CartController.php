@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -13,6 +14,7 @@ class CartController extends Controller
      */
     public function index()
     {
+      // dd(\Cart::getContent());
         return view('cart');
     }
 
@@ -34,7 +36,17 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \Cart::add(array(
+          'id' => $request->id,
+          'name' => $request->name,
+          'price' => $request->price,
+          'quantity' => 1,
+          'attributes' => array(
+            'slug' => $request->slug,
+          )
+        ));
+
+        return redirect()->route('cart.index');
     }
 
     /**
@@ -79,6 +91,8 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        \Cart::remove($id);
+
+        return back();
     }
 }
