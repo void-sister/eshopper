@@ -16,15 +16,16 @@ Route::get('/', 'IndexPageController@index')->name('index');
 Route::get('/shop', 'ShopController@index')->name('shop.index');
 Route::get('/shop/{product}', 'ShopController@show')->name('shop.show');
 
+Route::get('/cart', 'CartController@index')->name('cart.index');
+
+
+
 
 Route::get('/blog-single', function () {
     return view('blog-single');
 });
 Route::get('/blog', function () {
     return view('blog');
-});
-Route::get('/cart', function () {
-    return view('cart');
 });
 Route::get('/checkout', function () {
     return view('checkout');
