@@ -15,7 +15,11 @@ class IndexPageController extends Controller
     public function index()
     {
         $products = Product::inRandomOrder()->take(6)->get();
+        $recommended = Product::recommended()->get();
 
-        return view('index')->with('products', $products);
+        return view('index')->with([
+          'recommended' => $recommended,
+          'products'=> $products,
+        ]);
     }
 }

@@ -28,7 +28,12 @@ class ShopController extends Controller
     public function show($slug)
     {
         $product = Product::where('slug', $slug)->firstOrFail();
+        $recommended = Product::where('slug', '!=', $slug)->recommended()->get();
 
-        return view('product-details')->with('product', $product);
+        return view('product-details')->with([
+          'recommended' => $recommended,
+          'product'=> $product,
+        ]);
+
     }
 }
