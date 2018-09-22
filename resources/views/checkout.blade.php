@@ -2,211 +2,93 @@
 
 @section('title', 'Checkout')
 
+@section('extra-css')
+	<script src="https://js.stripe.com/v3/"></script>
+@endsection
+
 @section('content')
 	<section id="cart_items">
 		<div class="container">
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
-				  <li><a href="#">Home</a></li>
+				  <li><a href="/">Home</a></li>
 				  <li class="active">Check out</li>
 				</ol>
 			</div><!--/breadcrums-->
 
-			<div class="step-one">
-				<h2 class="heading">Step1</h2>
-			</div>
-			<div class="checkout-options">
-				<h3>New User</h3>
-				<p>Checkout options</p>
-				<ul class="nav">
-					<li>
-						<label><input type="checkbox"> Register Account</label>
-					</li>
-					<li>
-						<label><input type="checkbox"> Guest Checkout</label>
-					</li>
-					<li>
-						<a href=""><i class="fa fa-times"></i>Cancel</a>
-					</li>
-				</ul>
-			</div><!--/checkout-options-->
+			
+			<div>
+				<form action="#" id="payment-form">
+					<h2>Billing Details</h2>
 
-			<div class="register-req">
-				<p>Please use Register And Checkout to easily get access to your order history, or use Checkout as Guest</p>
-			</div><!--/register-req-->
+					<div class="form-group">
+						<label for="email">Email Address</label>
+						<input type="email" class="form-control" id="email" name="email" value="">
+					</div>
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input type="text" class="form-control" id="name" name="name" value="">
+					</div>
+					<div class="form-group">
+						<label for="address">Address</label>
+						<input type="text" class="form-control" id="address" name="address" value="">
+					</div>
+					<div class="form-group">
+						<label for="city">City</label>
+						<input type="text" class="form-control" id="city" name="city" value="">
+					</div>
+					<div class="form-group">
+						<label for="province">Province</label>
+						<input type="text" class="form-control" id="province" name="province" value="">
+					</div>
+					<div class="form-group">
+						<label for="zip">Postal Code</label>
+						<input type="text" class="form-control" id="zip" name="zip" value="">
+					</div>
+					<div class="form-group">
+						<label for="phone">Phone</label>
+						<input type="text" class="form-control" id="phone" name="phone" value="">
+					</div>
+				
+					
 
-			<div class="shopper-informations">
-				<div class="row">
-					<div class="col-sm-3">
-						<div class="shopper-info">
-							<p>Shopper Information</p>
-							<form>
-								<input type="text" placeholder="Display Name">
-								<input type="text" placeholder="User Name">
-								<input type="password" placeholder="Password">
-								<input type="password" placeholder="Confirm password">
-							</form>
-							<a class="btn btn-primary" href="">Get Quotes</a>
-							<a class="btn btn-primary" href="">Continue</a>
-						</div>
-					</div>
-					<div class="col-sm-5 clearfix">
-						<div class="bill-to">
-							<p>Bill To</p>
-							<div class="form-one">
-								<form>
-									<input type="text" placeholder="Company Name">
-									<input type="text" placeholder="Email*">
-									<input type="text" placeholder="Title">
-									<input type="text" placeholder="First Name *">
-									<input type="text" placeholder="Middle Name">
-									<input type="text" placeholder="Last Name *">
-									<input type="text" placeholder="Address 1 *">
-									<input type="text" placeholder="Address 2">
-								</form>
-							</div>
-							<div class="form-two">
-								<form>
-									<input type="text" placeholder="Zip / Postal Code *">
-									<select>
-										<option>-- Country --</option>
-										<option>United States</option>
-										<option>Bangladesh</option>
-										<option>UK</option>
-										<option>India</option>
-										<option>Pakistan</option>
-										<option>Ucrane</option>
-										<option>Canada</option>
-										<option>Dubai</option>
-									</select>
-									<select>
-										<option>-- State / Province / Region --</option>
-										<option>United States</option>
-										<option>Bangladesh</option>
-										<option>UK</option>
-										<option>India</option>
-										<option>Pakistan</option>
-										<option>Ucrane</option>
-										<option>Canada</option>
-										<option>Dubai</option>
-									</select>
-									<input type="password" placeholder="Confirm password">
-									<input type="text" placeholder="Phone *">
-									<input type="text" placeholder="Mobile Phone">
-									<input type="text" placeholder="Fax">
-								</form>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="order-message">
-							<p>Shipping Order</p>
-							<textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
-							<label><input type="checkbox"> Shipping to bill address</label>
-						</div>
-					</div>
-				</div>
+
+			<h2>Payment Details</h2>
+			
+			<div class="form-group">
+				<label for="name_on_card">Name on Card</label>
+				<input type="text" name="name_on_card" id="name_on_card" class="form-control" value="">
 			</div>
+
+			<div class="form-group">
+				<label for="card-element">
+			      Credit or debit card
+			    </label>
+			    <div id="card-element">
+			      <!-- A Stripe Element will be inserted here. -->
+			    </div>
+
+			    <!-- Used to display form errors. -->
+			    <div id="card-errors" role="alert"></div>
+			</div>
+			<button>Submit Payment</button>
+			</form>
+			</div>
+
+			
 			<div class="review-payment">
 				<h2>Review & Payment</h2>
 			</div>
 
-			<div class="table-responsive cart_info">
-				<table class="table table-condensed">
-					<thead>
-						<tr class="cart_menu">
-							<td class="image">Item</td>
-							<td class="description"></td>
-							<td class="price">Price</td>
-							<td class="quantity">Quantity</td>
-							<td class="total">Total</td>
-							<td></td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/one.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
+			@include('partials.cart')
 
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/two.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/three.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
 						<tr>
 							<td colspan="4">&nbsp;</td>
 							<td colspan="2">
 								<table class="table table-condensed total-result">
 									<tr>
 										<td>Cart Sub Total</td>
-										<td>$59</td>
+										<td>${{ \Cart::getSubTotal() }}</td>
 									</tr>
 									<tr>
 										<td>Exo Tax</td>
@@ -218,7 +100,7 @@
 									</tr>
 									<tr>
 										<td>Total</td>
-										<td><span>$61</span></td>
+										<td><span>${{ \Cart::getTotal() }}</span></td>
 									</tr>
 								</table>
 							</td>
@@ -226,17 +108,104 @@
 					</tbody>
 				</table>
 			</div>
+
+
 			<div class="payment-options">
-					<span>
-						<label><input type="checkbox"> Direct Bank Transfer</label>
-					</span>
-					<span>
-						<label><input type="checkbox"> Check Payment</label>
-					</span>
-					<span>
-						<label><input type="checkbox"> Paypal</label>
-					</span>
-				</div>
+				<span>
+					<label><input type="checkbox"> Direct Bank Transfer</label>
+				</span>
+				<span>
+					<label><input type="checkbox"> Check Payment</label>
+				</span>
+				<span>
+					<label><input type="checkbox"> Paypal</label>
+				</span>
+			</div>
 		</div>
 	</section> <!--/#cart_items-->
+@endsection
+
+@section('extra-js')
+	<script>
+		(function(){
+			// Create a Stripe client.
+			var stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+
+			// Create an instance of Elements.
+			var elements = stripe.elements();
+
+			// Custom styling can be passed to options when creating an Element.
+			// (Note that this demo uses a wider set of styles than the guide below.)
+			var style = {
+			  base: {
+			    color: '#32325d',
+			    lineHeight: '18px',
+			    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+			    fontSmoothing: 'antialiased',
+			    fontSize: '16px',
+			    '::placeholder': {
+			      color: '#aab7c4'
+			    }
+			  },
+			  invalid: {
+			    color: '#fa755a',
+			    iconColor: '#fa755a'
+			  }
+			};
+
+			// Create an instance of the card Element.
+			var card = elements.create('card', {style: style});
+
+			// Add an instance of the card Element into the `card-element` <div>.
+			card.mount('#card-element');
+
+			// Handle real-time validation errors from the card Element.
+			card.addEventListener('change', function(event) {
+			  var displayError = document.getElementById('card-errors');
+			  if (event.error) {
+			    displayError.textContent = event.error.message;
+			  } else {
+			    displayError.textContent = '';
+			  }
+			});
+
+			// Handle form submission.
+			var form = document.getElementById('payment-form');
+			form.addEventListener('submit', function(event) {
+			  event.preventDefault();
+
+			  var options = {
+				  name: document.getElementById('name_on_card').value,
+				  address_line1: document.getElementById('address').value,
+				  address_city: document.getElementById('city').value,
+				  address_state: document.getElementById('province').value,
+				  address_zip: document.getElementById('zip').value
+				}
+
+			  stripe.createToken(card, options).then(function(result) {
+			    if (result.error) {
+			      // Inform the user if there was an error.
+			      var errorElement = document.getElementById('card-errors');
+			      errorElement.textContent = result.error.message;
+			    } else {
+			      // Send the token to your server.
+			      stripeTokenHandler(result.token);
+			    }	
+			  });
+			});
+
+			function stripeTokenHandler(token) {
+			  // Insert the token ID into the form so it gets submitted to the server
+			  var form = document.getElementById('payment-form');
+			  var hiddenInput = document.createElement('input');
+			  hiddenInput.setAttribute('type', 'hidden');
+			  hiddenInput.setAttribute('name', 'stripeToken');
+			  hiddenInput.setAttribute('value', token.id);
+			  form.appendChild(hiddenInput);
+
+			  // Submit the form
+			  form.submit();
+			}
+		})();
+	</script>
 @endsection

@@ -26,6 +26,8 @@ Route::get('empty', function(){
   \Cart::clear();
 });
 
+Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
+
 
 
 Route::get('/blog-single', function () {
@@ -33,9 +35,6 @@ Route::get('/blog-single', function () {
 });
 Route::get('/blog', function () {
     return view('blog');
-});
-Route::get('/checkout', function () {
-    return view('checkout');
 });
 Route::get('/contact-us', function () {
     return view('contact-us');
