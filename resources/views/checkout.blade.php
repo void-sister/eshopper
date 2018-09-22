@@ -16,9 +16,10 @@
 				</ol>
 			</div><!--/breadcrums-->
 
-			
-			<div>
-				<form action="#" id="payment-form">
+
+			{{-- <div>
+				<form action="{{ route('checkout.store') }}" method="POST" id="payment-form">
+					{{ csrf_field() }}
 					<h2>Billing Details</h2>
 
 					<div class="form-group">
@@ -49,33 +50,73 @@
 						<label for="phone">Phone</label>
 						<input type="text" class="form-control" id="phone" name="phone" value="">
 					</div>
-				
-					
+
+					<h2>Payment Details</h2>
+
+					<div class="form-group">
+						<label for="name_on_card">Name on Card</label>
+						<input type="text" name="name_on_card" id="name_on_card" class="form-control" value="">
+					</div>
+
+					<div class="form-group">
+						<label for="card-element">
+					      Credit or debit card
+					    </label>
+					    <div id="card-element">
+					      <!-- A Stripe Element will be inserted here. -->
+					    </div>
+
+					    <!-- Used to display form errors. -->
+					    <div id="card-errors" role="alert"></div>
+					</div>
+					<button>Submit Payment</button>
+				</form>
+			</div> --}}
 
 
-			<h2>Payment Details</h2>
-			
-			<div class="form-group">
-				<label for="name_on_card">Name on Card</label>
-				<input type="text" name="name_on_card" id="name_on_card" class="form-control" value="">
+			<div class="shopper-info">
+				<form action="{{ route('checkout.store') }}" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="test_public_key" id="payment-form" method="post">
+	    		{{ csrf_field() }}
+	    		<div class='form-row'>
+	        	<div class='col-xs-12 form-group required'>
+	            <label class='control-label'>Name on Card</label>
+							<input class='form-control' size='4' type='text'>
+	        	</div>
+	    		</div>
+	    		<div class='form-row'>
+	        	<div class='col-xs-12 form-group card required'>
+	            	<label class='control-label'>Card Number</label>
+								<input autocomplete='off' class='form-control card-number' size='20' type='text'>
+	        	</div>
+	    		</div>
+	    		<div class='form-row'>
+	        	<div class='col-xs-4 form-group cvc required'>
+	            	<label class='control-label'>CVC</label>
+								<input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' type='text'>
+	        	</div>
+	        	<div class='col-xs-4 form-group expiration required'>
+	            <label class='control-label'>Expiration</label>
+							<input class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
+	        	</div>
+	        	<div class='col-xs-4 form-group expiration required'>
+	            <label class='control-label'> </label>
+							<input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'>
+	        	</div>
+	    		</div>
+	    		<div class='form-row'>
+	        	<div class='col-md-12 form-group'>
+	            <button class='form-control btn btn-primary submit-button' type='submit' style="margin-top: 10px;">Pay »</button>
+	        	</div>
+	    		</div>
+	    		<div class='form-row'>
+	        	<div class='col-md-12 error form-group hide'>
+	            <div class='alert-danger alert'>Please correct the errors and try again.</div>
+	        	</div>
+	    		</div>
+				</form>
 			</div>
 
-			<div class="form-group">
-				<label for="card-element">
-			      Credit or debit card
-			    </label>
-			    <div id="card-element">
-			      <!-- A Stripe Element will be inserted here. -->
-			    </div>
 
-			    <!-- Used to display form errors. -->
-			    <div id="card-errors" role="alert"></div>
-			</div>
-			<button>Submit Payment</button>
-			</form>
-			</div>
-
-			
 			<div class="review-payment">
 				<h2>Review & Payment</h2>
 			</div>
@@ -190,7 +231,7 @@
 			    } else {
 			      // Send the token to your server.
 			      stripeTokenHandler(result.token);
-			    }	
+			    }
 			  });
 			});
 

@@ -27,6 +27,7 @@ Route::get('empty', function(){
 });
 
 Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
+Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
 
 
 
