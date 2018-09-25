@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -34,7 +35,18 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+
+      \Stripe\Stripe::setApiKey("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
+
+      $charge = \Stripe\Charge::create(array(
+        "amount" => \Cart::getTotal(),
+        "currency" => "usd",
+        "source" => $request->stripeToken,
+        // "receipt_email" => $request->email,
+        "description" => "Charge for jenny.rosen@example.com"
+      ));
+
+      return view('success.thank_you');
     }
 
     /**
