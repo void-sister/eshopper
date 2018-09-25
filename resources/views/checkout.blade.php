@@ -73,8 +73,8 @@
 				</form>
 			</div> --}}
 
-
 			<div class="shopper-info">
+				<div class="row">
 				<form action="{{ route('checkout.store') }}" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="test_public_key" id="payment-form" method="post">
 	    		{{ csrf_field() }}
 	    		<div class='form-row'>
@@ -114,6 +114,7 @@
 	        	</div>
 	    		</div>
 				</form>
+			</div>
 			</div>
 
 
