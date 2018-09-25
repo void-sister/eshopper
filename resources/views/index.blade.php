@@ -86,7 +86,7 @@
 										<a href="{{ route('shop.show', $product->slug) }}"><img src="images/products/{{ $product->slug }}_xl.jpg" alt="" /></a>
 										<h2>${{ $product->price }}</h2>
 										<a href="{{ route('shop.show', $product->slug) }}"><p><b>{{ $product->name }}</b></p></a>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										@include('partials.cart-store')
 									</div>
 								</div>
 								<div class="choose">

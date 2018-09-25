@@ -49,14 +49,13 @@ class CartController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Clear the cart.
      */
-    public function show($id)
+    public function empty()
     {
-        //
+        \Cart::clear();
+
+        return redirect()->back();
     }
 
     /**
