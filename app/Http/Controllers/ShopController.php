@@ -34,6 +34,5 @@ class ShopController extends Controller
           'recommended' => $recommended,
           'product'=> $product,
         ]);
-
     }
 }

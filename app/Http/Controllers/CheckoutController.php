@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Http\Request;
 
-class CartController extends Controller
+class CheckoutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('cart');
+        return view('checkout');
     }
 
     /**
@@ -35,17 +35,18 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        \Cart::add(array(
-          'id' => $request->id,
-          'name' => $request->name,
-          'price' => $request->price,
-          'quantity' => 1,
-          'attributes' => array(
-            'slug' => $request->slug,
-          )
-        ));
 
-        return redirect()->route('cart.index');
+      \Stripe\Stripe::setApiKey("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
+
+      $charge = \Stripe\Charge::create(array(
+        "amount" => \Cart::getTotal(),
+        "currency" => "usd",
+        "source" => $request->stripeToken,
+        // "receipt_email" => $request->email,
+        "description" => "Charge for jenny.rosen@example.com"
+      ));
+
+      return view('success.thank_you');
     }
 
     /**
@@ -90,8 +91,6 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        \Cart::remove($id);
-
-        return back();
+        //
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use Darryldecode\Cart\Facades\CartFacade;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +19,15 @@ Route::get('/shop', 'ShopController@index')->name('shop.index');
 Route::get('/shop/{product}', 'ShopController@show')->name('shop.show');
 
 Route::get('/cart', 'CartController@index')->name('cart.index');
+Route::post('/cart', 'CartController@store')->name('cart.store');
+Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy');
 
+Route::get('empty', function(){
+  \Cart::clear();
+});
+
+Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
+Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
 
 
 
@@ -26,9 +36,6 @@ Route::get('/blog-single', function () {
 });
 Route::get('/blog', function () {
     return view('blog');
-});
-Route::get('/checkout', function () {
-    return view('checkout');
 });
 Route::get('/contact-us', function () {
     return view('contact-us');

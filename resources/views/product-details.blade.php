@@ -37,13 +37,23 @@
 							<p>Web ID: 1089772</p>
 							<img src="{{ URL::asset('images/product-details/rating.png') }}" alt="" />
 							<span>
-								<span>${{ $product->price }}</span>
+								<span>US ${{ $product->price }}</span>
 								<label>Quantity:</label>
 								<input type="text" value="1" />
-								<button type="button" class="btn btn-fefault cart">
-									<i class="fa fa-shopping-cart"></i>
-									Add to cart
-								</button>
+
+								<form action="{{ route('cart.store') }}" method="POST">
+									{{ csrf_field() }}
+									<input type="hidden" name="id" value="{{ $product->id }}" />
+									<input type="hidden" name="name" value="{{ $product->name }}" />
+									<input type="hidden" name="price" value="{{ $product->price }}" />
+									<input type="hidden" name="slug" value="{{ $product->slug }}" />
+
+									<button type="sumbit" class="btn btn-fefault cart">
+										<i class="fa fa-shopping-cart"></i>
+										Add to cart
+									</button>
+								</form>
+
 							</span>
 
 							<p><b>Availability:</b>
