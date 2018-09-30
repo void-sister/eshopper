@@ -16,25 +16,23 @@
 				</ol>
 			</div><!--/breadcrums-->
 
-
 			<div class="shopper-info">
 				<p>Shipment Details</p>
 				<form action="{{ route('checkout.store') }}" method="POST" id="payment-form" data-stripe-publishable-key="test_public_key">
 					{{ csrf_field() }}
 
-					<input type="email" id="email" name="email" placeholder="Email Address">
-					<input type="text" id="name" name="name" placeholder="Name">
-					<input type="text" id="address" name="address" placeholder="Address">
-					<input type="text" id="city" name="city" placeholder="City">
-					<input type="text" id="province" name="province" placeholder="Province">
-					<input type="text" id="zip" name="zip" placeholder="Postal Code">
-					<input type="text" id="phone" name="phone" placeholder="Phone">
+					<input type="email" id="email" name="email" placeholder="Email Address" value="{{ old('email') }}">
+					<input type="text" id="name" name="name" placeholder="Name" value="{{ old('name') }}">
+					<input type="text" id="address" name="address" placeholder="Address" value="{{ old('address') }}">
+					<input type="text" id="city" name="city" placeholder="City" value="{{ old('city') }}">
+					@include('partials.countries-list')
+					<input type="text" id="phone" name="phone" placeholder="Phone" value="{{ old('phone') }}">
 
 					<p>Payment Details</p>
 
 					<div class="form-group">
 						<label for="name_on_card">Name on Card</label>
-						<input type="text" name="name_on_card" id="name_on_card" class="form-control" value="">
+						<input type="text" name="name_on_card" id="name_on_card" class="form-control" value="{{ old('name_on_card') }}">
 					</div>
 
 					<div class="form-group">
@@ -48,7 +46,7 @@
 					    <!-- Used to display form errors. -->
 					    <div id="card-errors" role="alert"></div>
 					</div>
-					<button class="btn btn-primary">Submit Payment</button>
+					<button type="submit" id="complete-order" class="btn btn-primary">Submit Payment</button>
 				</form>
 			</div>
 
@@ -91,7 +89,7 @@
 	<script>
 	(function(){
 		// Create a Stripe client.
-		var stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+		var stripe = Stripe('pk_test_c0ZPRTbnMi3o24TDPTdz8TIz');
 
 		// Create an instance of Elements.
 		var elements = stripe.elements();
@@ -136,6 +134,9 @@
 		form.addEventListener('submit', function(event) {
 			event.preventDefault();
 
+			//Disable the submit button to prevent repeated clicks
+			document.getElementById('complete-order').disabled = true;
+
 			var options = {
 				name: document.getElementById('name_on_card').value,
 				address_line1: document.getElementById('address').value,
@@ -149,6 +150,10 @@
 					// Inform the user if there was an error.
 					var errorElement = document.getElementById('card-errors');
 					errorElement.textContent = result.error.message;
+
+					//Enable the submit button
+					document.getElementById('complete-order').disabled = false;
+
 				} else {
 					// Send the token to your server.
 					stripeTokenHandler(result.token);

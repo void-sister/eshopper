@@ -12,8 +12,9 @@
 				</ol>
 			</div>
 
+			<div style="margin-bottom:10px;">
 				<a class="btn btn-default update" href="{{ route('cart.clear') }}">Clear Cart</a>
-				<br>
+			</div>
 
 			@include('partials.cart')
 					</tbody>
@@ -32,8 +33,8 @@
 							<li>Shipping Cost <span>Free</span></li>
 							<li>Total <span>{{ \Cart::getTotal() }}</span></li>
 						</ul>
-							<a class="btn btn-default update" href="{{ route('shop.index') }}">Continue Shopping</a>
-							<a class="btn btn-default check_out" href="{{ route('checkout.index') }}">Check Out</a>
+							<a class="btn btn-default update" href="{{ route('shop.index') }}">Back to Shop</a>
+							<a class="btn btn-default check_out" href="{{ route('checkout.index') }}">Proceed to Checkout</a>
 					</div>
 				</div>
 			</div>

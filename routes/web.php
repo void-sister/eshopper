@@ -26,7 +26,7 @@ Route::get('/cart/empty', 'CartController@empty')->name('cart.clear');
 Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
 Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
 
-
+Route::get('/thankyou', 'ConfirmationController@index')->name('confirmation.index');
 
 Route::get('/blog-single', function () {
     return view('blog-single');
