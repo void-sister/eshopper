@@ -14,17 +14,9 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('cart');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+      // $cart = \Cart::getContent();
+      // dd($cart);
+      return view('cart');
     }
 
     /**
@@ -40,9 +32,9 @@ class CartController extends Controller
           'name' => $request->name,
           'price' => $request->price,
           'quantity' => 1,
-          'attributes' => array(
-            'slug' => $request->slug,
-          )
+          // 'attributes' => array(
+          //   'slug' => $request->slug,
+          // )
         ));
 
         return redirect()->route('cart.index');
@@ -59,17 +51,6 @@ class CartController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -78,7 +59,16 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // \Cart::update($id, array(
+        //   'quantity' => array(
+        //     'relative' => false,
+        //     'value' => $request->quantity
+        //   ),
+        // ));
         //
+        // return response()->json(['success' => true]);
+
+        return $request->all();
     }
 
     /**

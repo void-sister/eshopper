@@ -17,9 +17,6 @@
 			</div>
 
 			@include('partials.cart')
-					</tbody>
-				</table>
-			</div>
 	</section> <!--/#cart_items-->
 
 	<section id="do_action">

@@ -24,12 +24,14 @@
 					<p>${{ $item->price }}</p>
 				</td>
 				<td class="cart_quantity">
+
 					<div class="cart_quantity_button">
-						<a class="cart_quantity_up" href=""> + </a>
-						<input class="cart_quantity_input" type="text" name="quantity" value="{{ $item->quantity }}" autocomplete="off" size="2">
-						<a class="cart_quantity_down" href=""> - </a>
+						{{-- <a class="cart_quantity_up" id="cart_quantity_up" onmousedown="increment_quantity()"> + </a> --}}
+						<input class="cart_quantity_input" data-id="{{ $item->id }}" id="cart_quantity_input" type="text" name="quantity" value="{{ $item->quantity }}" autocomplete="off" size="2">
+						{{-- <a class="cart_quantity_down" href="" id="cart_quantity_down"> - </a> --}}
 					</div>
 				</td>
+
 				<td class="cart_total">
 					<p class="cart_total_price">${{ \Cart::get($item->id)->getPriceSum() }}</p>
 				</td>
@@ -43,3 +45,49 @@
 				</td>
 			</tr>
 			@endforeach
+		</tbody>
+	</table>
+</div>
+
+
+
+@section('extra-js')
+	@parent
+	<script src="{{ asset('js/app.js') }}"></script>
+	<script>
+
+	(function(){
+		const classname = document.querySelectorAll('.cart_quantity_input')
+		Array.from(classname).forEach(function(element) {
+			element.addEventListener('change', function() {
+				const id = element.getAttribute('data-id')
+				axios.patch(`/cart/${id}`, {
+			    quantity: this.value
+			  })
+			  .then(function (response) {
+			    console.log(response);
+			  })
+			  .catch(function (error) {
+			    console.log(error);
+			  });
+			})
+		})
+	})();
+
+	// function increment_quantity() {
+	// 	var inputQuantityElement = $("#cart_quantity_input");
+	// 	var newQuantity = parseInt($(inputQuantityElement).val())+1;
+	//
+	// 	// console.log(newQuantity);
+	// }
+
+	// function decrement_quantity() {
+	// 	var inputQuantityElement = $("#cart_quantity_input");
+	// 	if($(inputQuantityElement).val() > 1)
+	// 	{
+	// 		var newQuantity = parseInt($(inputQuantityElement).val())-1;
+	// 	}
+	// 	console.log(newQuantity);
+	// }
+	</script>
+@endsection

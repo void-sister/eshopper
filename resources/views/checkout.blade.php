@@ -55,32 +55,31 @@
 			</div>
 
 			@include('partials.cart')
-						<tr>
-							<td colspan="4">&nbsp;</td>
-							<td colspan="2">
-								<table class="table table-condensed total-result">
-									<tr>
-										<td>Cart Sub Total</td>
-										<td>${{ \Cart::getSubTotal() }}</td>
-									</tr>
-									<tr>
-										<td>Exo Tax</td>
-										<td>$2</td>
-									</tr>
-									<tr class="shipping-cost">
-										<td>Shipping Cost</td>
-										<td>Free</td>
-									</tr>
-									<tr>
-										<td>Total</td>
-										<td><span>${{ \Cart::getTotal() }}</span></td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+			<table>
+				<tr>
+					<td colspan="4">&nbsp;</td>
+					<td colspan="2">
+						<table class="table table-condensed total-result">
+							<tr>
+								<td>Cart Sub Total</td>
+								<td>${{ \Cart::getSubTotal() }}</td>
+							</tr>
+							<tr>
+								<td>Exo Tax</td>
+								<td>$2</td>
+							</tr>
+							<tr class="shipping-cost">
+								<td>Shipping Cost</td>
+								<td>Free</td>
+							</tr>
+							<tr>
+								<td>Total</td>
+								<td><span>${{ \Cart::getTotal() }}</span></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</section> <!--/#cart_items-->
 @endsection
