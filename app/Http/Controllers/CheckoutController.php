@@ -31,7 +31,7 @@ class CheckoutController extends Controller
       })->values()->toJson();
 
       try {
-        \Stripe\Stripe::setApiKey("sk_test_5YtJN9SAPkZOZogvPtlOwcTP");
+        \Stripe\Stripe::setApiKey("sk_test_iP3Vaiq9q4d5ORVbnnMR43o4");
 
         $charge = \Stripe\Charge::create(array(
           "amount" => \Cart::getTotal()*100,

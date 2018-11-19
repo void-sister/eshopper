@@ -50,6 +50,14 @@
 				</form>
 			</div>
 
+
+
+		
+
+
+
+
+
 			<div class="review-payment">
 				<h2>Review Cart</h2>
 			</div>
@@ -141,7 +149,7 @@
 				address_line1: document.getElementById('address').value,
 				address_city: document.getElementById('city').value,
 				address_state: document.getElementById('province').value,
-				address_zip: document.getElementById('zip').value
+
 			}
 
 			stripe.createToken(card, options).then(function(result) {

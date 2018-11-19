@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Http\Request;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class CartController extends Controller
 {
@@ -59,16 +61,19 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // \Cart::update($id, array(
-        //   'quantity' => array(
-        //     'relative' => false,
-        //     'value' => $request->quantity
-        //   ),
-        // ));
-        //
-        // return response()->json(['success' => true]);
+      $validator = $request->validate([
+        'quantity' => 'required|numeric|between:1,5'
+      ]);
 
-        return $request->all();
+        \Cart::update($id, [
+          'quantity' => [
+            'relative' => false,
+            'value' => $request->quantity
+          ],
+        ]);
+
+        return response()->json(['success' => true]);
+
     }
 
     /**
