@@ -14,15 +14,34 @@
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="left-sidebar">
-						@include('partials.left_sidebar')
+
+						<h2>Category</h2>
+		        <div class="panel-group category-products" id="accordian"><!--category-products-->
+		          @foreach ($categories as $category)
+		            <div class="panel panel-default">
+		              <div class="panel-heading">
+		                <h4 class="panel-title"><a href="{{ route('shop.index', ['category' => $category->slug]) }}">{{ $category->name }}</a></h4>
+		              </div>
+		            </div>
+		          @endforeach
+		        </div><!--/category-products-->
+
 					</div>
 				</div>
 
 				<div class="col-sm-9 padding-right">
-					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Features Items</h2>
+					<div class="features_items"><!--featured_items-->
+						<h2 class="title text-center">{{ $categoryName }}</h2>
 
-					  @foreach($products as $product)
+						<div>
+							<strong>Price: </strong>
+							<a href="{{ route('shop.index', ['category'=> request()->category, 'sort'=> 'low_high']) }}">Low to High</a> |
+							<a href="{{ route('shop.index', ['category'=> request()->category, 'sort'=> 'high_low']) }}">High to Low</a>
+						</div>
+						<br>
+
+
+					  @forelse($products as $product)
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
@@ -41,15 +60,14 @@
 								</div>
 							</div>
 						</div>
-						@endforeach
-
-						<ul class="pagination">
-							<li class="active"><a href="">1</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">&raquo;</a></li>
-						</ul>
+					@empty
+						<div>No items found</div>
+					@endforelse
 					</div><!--features_items-->
+
+					<div class="spacer"></div>
+					{{ $products->appends(request()->input())->links() }}
+
 				</div>
 
 

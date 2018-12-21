@@ -69,14 +69,9 @@
 <section>
 	<div class="container">
 	  <div class="row">
-	    <div class="col-sm-3">
-	      <div class="left-sidebar">
-					@include('partials.left_sidebar')
-				</div>
-			</div>
 
-			<div class="col-sm-9 padding-right">
-				<div class="features_items"><!--features_items-->
+			<div class="col-sm-12 padding-right">
+				<div class="features_items"><!--featured_items-->
 					<h2 class="title text-center">Featured Items</h2>
 					@foreach($products as $product)
 						<div class="col-sm-4">
@@ -100,7 +95,11 @@
 					@endforeach
 				</div><!--features_items-->
 
-				@include('partials.recommended_items')
+					<div class="container text-center">
+						<h2><a href="{{ route('shop.index') }}" class="btn btn-secondary btn-lg btn-warning">View More</a></h2>
+			      <br>
+					</div>
+				</div>
 
 			</div>
 		</div>

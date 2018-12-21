@@ -12,102 +12,95 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-      Product::create([
-        'name' => 'PU Off The Shoulder Biker Dress',
-        'slug' => 'biker-dress',
-        'price' => 25,
-        'is_available' => true,
-      ]);
-
-      Product::create([
-        'name' => 'Crop Trucker Denim Jacket',
-        'slug' => 'denim-jacket',
-        'price' => 10,
-        'is_available' => true,
-      ]);
-
-      Product::create([
-        'name' => 'Tonal Flocked Indigo Denim Skirt',
-        'slug' => 'denim-skirt',
-        'price' => 30,
-        'is_available' => true,
-      ]);
-
-      Product::create([
-        'name' => 'Snake Print Slinky Cycling Shorts',
-        'slug' => 'cycling-shorts',
-        'price' => 22,
-        'is_available' => true,
-      ]);
-
-      Product::create([
-        'name' => 'Oversized Button Wool Look Coat',
-        'slug' => 'look-coat',
-        'price' => 40,
-        'is_available' => true,
-      ]);
-
-      Product::create([
-        'name' => 'Slinky Ruffle Sleeve Tie Front Crop',
-        'slug' => 'front-crop',
-        'price' => 18,
-        'is_available' => true,
-      ]);
-
-      Product::create([
-        'name' => 'Ribbed Sleeveless Basic Bodysuit',
-        'slug' => 'basic-bodysuit',
-        'price' => 12,
-        'is_available' => true,
-      ]);
-
-      Product::create([
-        'name' => 'Chunky Sports Trainers',
-        'slug' => 'sports-trainers',
-        'price' => 18,
-        'is_available' => true,
-      ]);
-
-      Product::create([
-        'name' => 'Satin Polka Dot Maxi Ruffle Kimono',
-        'slug' => 'ruffle-kimono',
-        'price' => 20,
-        'is_available' => true,
-      ]);
-
+      //Sportswear
+      for($i = 1; $i < 30; $i++)
+      {
         Product::create([
-          'name' => 'Cape Lepel Collar Jumpsuit',
-          'slug' => 'collar-jumpsuit',
-          'price' => 25,
+          'name' => 'Sportswear' . $i,
+          'slug' => 'sportswear-' . $i,
+          'price' => rand(18, 45),
           'is_available' => true,
-        ]);
+        ])->categories()->attach(1);
+      }
 
-        Product::create([
-          'name' => 'Twist Front Tie Polka Dot Playsuit',
-          'slug' => 'dot-playsuit',
-          'price' => 20,
-          'is_available' => true,
-        ]);
+      $product = Product::find(1);
+      $product->categories()->attach(2);
 
+      //Men
+      for($i = 1; $i < 30; $i++)
+      {
         Product::create([
-          'name' => 'Button Detail Skort',
-          'slug' => 'detail-skort',
-          'price' => 16,
+          'name' => 'Men' . $i,
+          'slug' => 'men-' . $i,
+          'price' => rand(18, 45),
           'is_available' => true,
-        ]);
+        ])->categories()->attach(2);
+      }
 
+      //Women
+      for($i = 1; $i < 30; $i++)
+      {
         Product::create([
-          'name' => 'Chunky Zip Rucksack',
-          'slug' => 'zip-rucksack',
-          'price' => 20,
+          'name' => 'Women' . $i,
+          'slug' => 'women-' . $i,
+          'price' => rand(18, 45),
           'is_available' => true,
-        ]);
+        ])->categories()->attach(3);
+      }
 
+      //Kids
+      for($i = 1; $i < 30; $i++)
+      {
         Product::create([
-          'name' => 'Light Wash Distressed Hem Boyfriend Jeans',
-          'slug' => 'boyfriend-jeans',
-          'price' => 25,
+          'name' => 'Kids' . $i,
+          'slug' => 'kids-' . $i,
+          'price' => rand(18, 45),
           'is_available' => true,
-        ]);
+        ])->categories()->attach(4);
+      }
+
+      //Fashion
+      for($i = 1; $i < 30; $i++)
+      {
+        Product::create([
+          'name' => 'Fashion' . $i,
+          'slug' => 'fashion-' . $i,
+          'price' => rand(18, 45),
+          'is_available' => true,
+        ])->categories()->attach(5);
+      }
+
+      //Households
+      for($i = 1; $i < 30; $i++)
+      {
+        Product::create([
+          'name' => 'Households' . $i,
+          'slug' => 'households-' . $i,
+          'price' => rand(18, 45),
+          'is_available' => true,
+        ])->categories()->attach(6);
+      }
+
+      //Interiors
+      for($i = 1; $i < 30; $i++)
+      {
+        Product::create([
+          'name' => 'Interiors' . $i,
+          'slug' => 'interiors-' . $i,
+          'price' => rand(18, 45),
+          'is_available' => true,
+        ])->categories()->attach(7);
+      }
+
+      //Clothing
+      for($i = 1; $i < 30; $i++)
+      {
+        Product::create([
+          'name' => 'Clothing' . $i,
+          'slug' => 'clothing-' . $i,
+          'price' => rand(18, 45),
+          'is_available' => true,
+        ])->categories()->attach(8);
+      }
     }
 }

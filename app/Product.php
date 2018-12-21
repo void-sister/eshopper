@@ -10,4 +10,9 @@ class Product extends Model
     {
       return $query->inRandomOrder()->take(3);
     }
+
+    public function categories()
+    {
+      return $this->belongsToMany('App\Category');
+    }
 }
