@@ -41,3 +41,8 @@ Route::get('/contact-us', function () {
 Route::get('/login', function () {
     return view('login');
 });
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

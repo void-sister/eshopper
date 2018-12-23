@@ -147,11 +147,13 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        Darryldecode\Cart\CartServiceProvider::class,
+
 
         /*
          * Package Service Providers...
          */
+        Darryldecode\Cart\CartServiceProvider::class,
+        TCG\Voyager\VoyagerServiceProvider::class,
 
 
         /*
@@ -212,7 +214,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        'Cart' => Darryldecode\Cart\Facades\CartFacade::class,  
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
     ],
 
 ];
