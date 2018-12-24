@@ -81,14 +81,7 @@
               <span class="icon-bar"></span>
             </button>
           </div>
-          <div class="mainmenu pull-left">
-            <ul class="nav navbar-nav collapse navbar-collapse">
-              <li><a href="/">Home</a></li>
-              <li><a href="{{ route('shop.index') }}">Shop</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="contact-us.html">Contact</a></li>
-            </ul>
-          </div>
+          {{ menu('main', 'menus.main') }}
         </div>
         <div class="col-sm-3">
           <div class="search_box pull-right">
