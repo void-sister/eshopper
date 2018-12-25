@@ -16,11 +16,11 @@
 			</div>
 
 
-			
-
-			<div style="margin-bottom:10px;">
+			<div style="margin:10px;">
 				<a class="btn btn-default update" href="{{ route('cart.clear') }}">Clear Cart</a>
 			</div>
+
+
 
 
 
@@ -36,9 +36,9 @@
 					<div class="total_area">
 						<ul>
 							<li>Cart Sub Total <span>{{ \Cart::getSubTotal() }}</span></li>
-							<li>Eco Tax <span>$2</span></li>
+							<li>Eco Tax <span>$2 per item = {{ \Cart::getTotalQuantity()*2 }}</span></li>
 							<li>Shipping Cost <span>Free</span></li>
-							<li>Total <span>{{ \Cart::getTotal() }}</span></li>
+							<li>Total <span>{{ \Cart::getTotal()+\Cart::getTotalQuantity()*2 }}</span></li>
 						</ul>
 							<a class="btn btn-default update" href="{{ route('shop.index') }}">Back to Shop</a>
 							<a class="btn btn-default check_out" href="{{ route('checkout.index') }}">Proceed to Checkout</a>

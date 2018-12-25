@@ -24,7 +24,7 @@ class CheckoutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CheckoutRequest $request)
+    public function store(Request $request)
     {
       $contents = \Cart::getContent()->map(function ($item) {
         return $item->id.','.$item->quantity;
@@ -34,7 +34,7 @@ class CheckoutController extends Controller
         \Stripe\Stripe::setApiKey("sk_test_iP3Vaiq9q4d5ORVbnnMR43o4");
 
         $charge = \Stripe\Charge::create(array(
-          "amount" => \Cart::getTotal()*100,
+          "amount" => (\Cart::getTotal()+\Cart::getTotalQuantity()*2)*100,
           "currency" => "usd",
           "source" => $request->stripeToken,
           "receipt_email" => $request->email,
@@ -53,50 +53,5 @@ class CheckoutController extends Controller
       } catch (Exception $e) {
         return view('errors.500');
       }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

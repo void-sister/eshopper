@@ -52,7 +52,7 @@
 
 
 
-		
+
 
 
 
@@ -74,7 +74,7 @@
 							</tr>
 							<tr>
 								<td>Exo Tax</td>
-								<td>$2</td>
+								<td>${{ \Cart::getTotalQuantity()*2 }}</td>
 							</tr>
 							<tr class="shipping-cost">
 								<td>Shipping Cost</td>
@@ -82,7 +82,7 @@
 							</tr>
 							<tr>
 								<td>Total</td>
-								<td><span>${{ \Cart::getTotal() }}</span></td>
+								<td><span>${{ \Cart::getTotal()+\Cart::getTotalQuantity()*2 }}</span></td>
 							</tr>
 						</table>
 					</td>
@@ -96,7 +96,7 @@
 	<script>
 	(function(){
 		// Create a Stripe client.
-		var stripe = Stripe('pk_test_c0ZPRTbnMi3o24TDPTdz8TIz');
+		var stripe = Stripe('pk_test_gw6IKP0K9a3foKSAI7Y9gXms');
 
 		// Create an instance of Elements.
 		var elements = stripe.elements();
@@ -106,7 +106,7 @@
 		var style = {
 			base: {
 				color: '#32325d',
-				lineHeight: '18px',
+				// lineHeight: '18px',
 				fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
 				fontSmoothing: 'antialiased',
 				fontSize: '16px',
