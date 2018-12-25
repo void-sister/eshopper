@@ -48,13 +48,13 @@ class ShopController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string  $slug
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
-        $product = Product::where('slug', $slug)->firstOrFail();
-        $recommended = Product::where('slug', '!=', $slug)->recommended()->get();
+        $product = Product::where('id', $id)->firstOrFail();
+        $recommended = Product::where('id', '!=', $id)->recommended()->get();
 
         return view('product-details')->with([
           'recommended' => $recommended,

@@ -46,9 +46,9 @@
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
-										<a href="{{ route('shop.show', $product->slug) }}"><img src="images/products/{{ $product->slug }}_xl.jpg" alt="{{ $product->name }}" /></a>
+										<a href="{{ route('shop.show', $product->id) }}"><img src="{{ URL::asset('storage/' . $product->image) }}" alt="{{ $product->name }}" /></a>
 										<h2>${{ $product->price }}</h2>
-										<a href="{{ route('shop.show', $product->slug) }}"><p><b>{{ $product->name }}</b></p></a>
+										<a href="{{ route('shop.show', $product->id) }}"><p><b>{{ $product->name }}</b></p></a>
 										@include('partials.cart-store')
 									</div>
 								</div>

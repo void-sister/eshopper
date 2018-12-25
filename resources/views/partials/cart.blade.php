@@ -14,10 +14,10 @@
 			@foreach(\Cart::getContent() as $item)
 			<tr>
 				<td class="cart_product">
-					<a href="{{ route('shop.show', 'biker-dress') }}"><img src="" alt="item"></a>
+					<a href="{{ route('shop.show', $item->id) }}"><img src="" alt="item"></a>
 				</td>
 				<td class="cart_description">
-					<h4><a href="{{ route('shop.show', 'biker-dress') }}">{{ $item->name }}</a></h4>
+					<h4><a href='{{ route('shop.show', $item->id) }}'>{{ $item->name }}</a></h4>
 					<p>Web ID: 1089772</p>
 				</td>
 				<td class="cart_price">
@@ -26,9 +26,7 @@
 				<td class="cart_quantity">
 
 					<div class="cart_quantity_button">
-						{{-- <a class="cart_quantity_up" id="cart_quantity_up" onmousedown="increment_quantity()"> + </a> --}}
 						<input class="cart_quantity_input" data-id="{{ $item->id }}" id="cart_quantity_input" type="text" name="quantity" value="{{ $item->quantity }}" autocomplete="off" size="2">
-						{{-- <a class="cart_quantity_down" href="" id="cart_quantity_down"> - </a> --}}
 					</div>
 				</td>
 
@@ -48,7 +46,6 @@
 		</tbody>
 	</table>
 </div>
-
 
 
 @section('extra-js')
@@ -75,21 +72,5 @@
 			})
 		})
 	})();
-
-	// function increment_quantity() {
-	// 	var inputQuantityElement = $("#cart_quantity_input");
-	// 	var newQuantity = parseInt($(inputQuantityElement).val())+1;
-	//
-	// 	// console.log(newQuantity);
-	// }
-
-	// function decrement_quantity() {
-	// 	var inputQuantityElement = $("#cart_quantity_input");
-	// 	if($(inputQuantityElement).val() > 1)
-	// 	{
-	// 		var newQuantity = parseInt($(inputQuantityElement).val())-1;
-	// 	}
-	// 	console.log(newQuantity);
-	// }
 	</script>
 @endsection
