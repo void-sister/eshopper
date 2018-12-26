@@ -15,16 +15,20 @@ class CheckoutController extends Controller
      */
     public function index()
     {
+        if (auth()->user() && request()->is('guestCheckout')) {
+          return redirect()->route('checkout.index');
+        }
+
         return view('checkout');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\CheckoutRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CheckoutRequest $request)
     {
       $contents = \Cart::getContent()->map(function ($item) {
         return $item->id.','.$item->quantity;

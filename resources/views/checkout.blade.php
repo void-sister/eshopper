@@ -16,13 +16,27 @@
 				</ol>
 			</div><!--/breadcrums-->
 
+			@if (count($errors)>0)
+					<div class="alert alert-danger">
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{!! $error !!}</li>
+							@endforeach
+						</ul>
+					</div>
+			@endif
+
 			<div class="shopper-info">
 				<p>Shipment Details</p>
 				<form action="{{ route('checkout.store') }}" method="POST" id="payment-form" data-stripe-publishable-key="test_public_key">
 					{{ csrf_field() }}
 
-					{{-- <input type="email" id="email" name="email" placeholder="Email Address" value="{{ old('email') }}"> --}}
-					<input type="email" id="email" name="email" placeholder="Email Address" value="{{ auth()->user()->email }}" readonly>
+					@if (auth()->user())
+						<input type="email" id="email" name="email" placeholder="Email Address" value="{{ auth()->user()->email }}" readonly>
+					@else
+						<input type="email" id="email" name="email" placeholder="Email Address" value="{{ old('email') }}">
+					@endif
+
 					<input type="text" id="name" name="name" placeholder="Name" value="{{ old('name') }}">
 					<input type="text" id="address" name="address" placeholder="Address" value="{{ old('address') }}">
 					<input type="text" id="city" name="city" placeholder="City" value="{{ old('city') }}">
