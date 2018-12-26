@@ -21,7 +21,8 @@
 				<form action="{{ route('checkout.store') }}" method="POST" id="payment-form" data-stripe-publishable-key="test_public_key">
 					{{ csrf_field() }}
 
-					<input type="email" id="email" name="email" placeholder="Email Address" value="{{ old('email') }}">
+					{{-- <input type="email" id="email" name="email" placeholder="Email Address" value="{{ old('email') }}"> --}}
+					<input type="email" id="email" name="email" placeholder="Email Address" value="{{ auth()->user()->email }}" readonly>
 					<input type="text" id="name" name="name" placeholder="Name" value="{{ old('name') }}">
 					<input type="text" id="address" name="address" placeholder="Address" value="{{ old('address') }}">
 					<input type="text" id="city" name="city" placeholder="City" value="{{ old('city') }}">

@@ -58,10 +58,28 @@
         <div class="col-sm-8">
           <div class="shop-menu pull-right">
             <ul class="nav navbar-nav">
-              <li><a href=""><i class="fa fa-user"></i> Account</a></li>
-              <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
+              {{-- <li><a href=""><i class="fa fa-user"></i> Account</a></li>
+              <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li> --}}
+              @guest
+                <li><a href="{{ route('login') }}"><i class="fa fa-lock"></i> Login</a></li>
+                <li><a href="{{ route('register') }}"><i class="fa fa-check"></i> Sign Up</a></li>
+              @else
+                <li>
+                  <a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                    <i class="fa fa-times-circle"></i> Logout
+                  </a>
+                </li>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                  {{ csrf_field() }}
+                </form>
+              @endguest
+
+
               <li><a href="{{ route('cart.index') }}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-              <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+
             </ul>
           </div>
         </div>
