@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use App\Order;
 use App\OrderProduct;
 use App\Mail\OrderPlaced;
@@ -34,6 +35,11 @@ class CheckoutController extends Controller
      */
     public function store(CheckoutRequest $request)
     {
+      //check race condition when there are less items available to purchase
+      if ($this->productsAreNoLongerAvailable()) {
+        return back()->withErrors('Sorry! One of the items in your cart is no longer available.');
+      }
+
       $contents = \Cart::getContent()->map(function ($item) {
         return $item->id.','.$item->quantity;
       })->values()->toJson();
@@ -56,6 +62,8 @@ class CheckoutController extends Controller
         $order = $this->addToOrdersTables($request, null);
         Mail::to($request->email)->send(new OrderPlaced($order));
 
+        //decrease the quantities of all the products in the cart
+        $this->decreaseQuantities();
 
         \Cart::clear();
 
@@ -102,4 +110,27 @@ class CheckoutController extends Controller
     {
       return (\Cart::getTotal()+\Cart::getTotalQuantity()*2)*100;
     }
+
+    protected function decreaseQuantities()
+    {
+      foreach (\Cart::getContent() as $item) {
+        $product = Product::find($item->id);
+
+        $product->update(['quantity' => $product->quantity - $item->quantity]);
+      }
+    }
+
+    protected function productsAreNoLongerAvailable()
+    {
+      foreach (\Cart::getContent() as $item) {
+        $product = Product::find($item->id);
+        if ($product->quantity < $item->quantity) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+
 }

@@ -26,7 +26,7 @@
 				<td class="cart_quantity">
 
 					<div class="cart_quantity_button">
-						<input class="cart_quantity_input" data-id="{{ $item->id }}" id="cart_quantity_input" type="text" name="quantity" value="{{ $item->quantity }}" autocomplete="off" size="2">
+						<input class="cart_quantity_input" data-productQuantity="{{ $item->quantity }}" data-id="{{ $item->id }}" id="cart_quantity_input" type="text" name="quantity" value="{{ $item->quantity }}" autocomplete="off" size="2">
 					</div>
 				</td>
 
@@ -58,8 +58,10 @@
 		Array.from(classname).forEach(function(element) {
 			element.addEventListener('change', function() {
 				const id = element.getAttribute('data-id')
+				const productQuantity = element.getAttribute('data-productQuantity')
 				axios.patch(`/cart/${id}`, {
-			    quantity: this.value
+			    quantity: this.value,
+					productQuantity: productQuantity
 			  })
 			  .then(function (response) {
 			    // console.log(response);

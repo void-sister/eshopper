@@ -56,9 +56,18 @@ class ShopController extends Controller
         $product = Product::where('id', $id)->firstOrFail();
         $recommended = Product::where('id', '!=', $id)->recommended()->get();
 
+        if ($product->quantity > setting('site.stock_threshold')) {
+          $stockLevel = 'In Stock';
+        } elseif ($product->quantity <= setting('site.stock_threshold') && $product->quantity > 0) {
+          $stockLevel = 'Low Stock';
+        } else {
+          $stockLevel = 'Not Available';
+        }
+
         return view('product-details')->with([
           'recommended' => $recommended,
           'product'=> $product,
+          'stockLevel' => $stockLevel,
         ]);
     }
 
@@ -81,10 +90,8 @@ class ShopController extends Controller
         'query' => 'required|min:3',
       ]);
 
-
       $query = $request->input('query');
       $products = Product::where('name', 'like', "%$query%")->paginate(10);
-
 
       return view('search-results')->with('products', $products);
     }

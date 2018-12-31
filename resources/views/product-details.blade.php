@@ -24,14 +24,12 @@
 							<img src="{{ URL::asset('images/product-details/rating.png') }}" alt="" />
 							<span>
 								<span>US ${{ $product->price }}</span>
-								@include('partials.cart-store')
+								@if ($product->quantity > 0)
+									@include('partials.cart-store')
+								@endif
 							</span>
 							<p><b>Availability:</b>
-								@if ($product->is_available === 1)
-									In Stock
-								@else
-									No Items
-								@endif
+								{{ $stockLevel }}
 							</p>
 							<p><b>Condition:</b> New</p>
 							<p><b>Brand:</b> E-SHOPPER</p>
