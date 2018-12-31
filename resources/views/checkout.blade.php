@@ -16,16 +16,6 @@
 				</ol>
 			</div><!--/breadcrums-->
 
-			@if (count($errors)>0)
-					<div class="alert alert-danger">
-						<ul>
-							@foreach ($errors->all() as $error)
-								<li>{!! $error !!}</li>
-							@endforeach
-						</ul>
-					</div>
-			@endif
-
 			<div class="shopper-info">
 				<p>Shipment Details</p>
 				<form action="{{ route('checkout.store') }}" method="POST" id="payment-form" data-stripe-publishable-key="test_public_key">
@@ -64,14 +54,6 @@
 					<button type="submit" id="complete-order" class="btn btn-primary">Submit Payment</button>
 				</form>
 			</div>
-
-
-
-
-
-
-
-
 
 			<div class="review-payment">
 				<h2>Review Cart</h2>

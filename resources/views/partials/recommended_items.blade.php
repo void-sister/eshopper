@@ -12,7 +12,7 @@
                 <img src="{{ asset('storage/'.$product->image) }}" alt="" weight="268" height="134" />
                 <h2>${{ $product->price }}</h2>
                 <p>{{ $product->name }}</p>
-                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                @include('partials.cart-store')
               </a>
             </div>
           </div>

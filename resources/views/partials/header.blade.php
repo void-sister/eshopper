@@ -102,9 +102,9 @@
           {{ menu('main', 'menus.main') }}
         </div>
         <div class="col-sm-3">
-          <div class="search_box pull-right">
-            <input type="text" placeholder="Search"/>
-          </div>
+          <form action="{{ route('search') }}" method="GET" class="search_box pull-right">
+            <input type="text" name="query" id="query" value="{{ request()->input('query') }}" placeholder="Search"/>
+          </form>
         </div>
       </div>
     </div>
