@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\OrderProduct;
+use App\Mail\OrderPlaced;
+use Illuminate\Support\Facades\Mail;
 use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Http\Request;
 use App\Http\Requests\CheckoutRequest;
@@ -40,7 +42,7 @@ class CheckoutController extends Controller
         \Stripe\Stripe::setApiKey("sk_test_iP3Vaiq9q4d5ORVbnnMR43o4");
 
         $charge = \Stripe\Charge::create([
-          "amount" => (\Cart::getTotal()+\Cart::getTotalQuantity()*2)*100,
+          "amount" => $this->getTotalAmount(),
           "currency" => "usd",
           "source" => $request->stripeToken,
           "receipt_email" => $request->email,
@@ -51,7 +53,9 @@ class CheckoutController extends Controller
             ],
         ]);
 
-        $this->addToOrdersTables($request, null);
+        $order = $this->addToOrdersTables($request, null);
+        Mail::to($request->email)->send(new OrderPlaced($order));
+
 
         \Cart::clear();
 
@@ -76,7 +80,7 @@ class CheckoutController extends Controller
         'billing_province' => $request->province,
         'billing_phone' => $request->phone,
         'billing_name_on_card' => $request->name_on_card,
-        'billing_total' => $charge->amount,
+        'billing_total' => $this->getTotalAmount(),
         'error' => $error,
       ]);
 
@@ -90,5 +94,12 @@ class CheckoutController extends Controller
           'quantity' => $item->quantity,
         ]);
       }
+
+      return $order;
+    }
+
+    protected function getTotalAmount()
+    {
+      return (\Cart::getTotal()+\Cart::getTotalQuantity()*2)*100;
     }
 }
