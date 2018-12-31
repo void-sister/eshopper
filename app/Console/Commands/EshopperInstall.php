@@ -46,28 +46,27 @@ class EshopperInstall extends Command
             $this->proceed();
           }
         }
+    }
 
+    protected function proceed()
+    {
+      File::deleteDirectory(public_path('storage/products/dummy'));
+      $this->callSilent('storage:link');
+      $copySuccess = File::copyDirectory(public_path('images/products'), public_path('storage/products/dummy'));
+      if ($copySuccess) {
+        $this->info('Images successfully copied to storage folder.');
+      }
 
-        protected function proceed()
-        {
-          File::deleteDirectory(public_path('storage/products/dummy'));
-          $this->callSilent('storage:link');
-          $copySuccess = File::copyDirectory(public_path('images/products'), public_path('storage/products/dummy'));
-          if ($copySuccess) {
-            $this->info('Images successfully copied to storage folder.');
-          }
+      $this->call('migrate:fresh', [
+        '--seed' => true,
+      ]);
+      $this->call('db:seed', [
+        '--class' => 'VoyagerDatabaseSeeder',
+      ]);
+      $this->call('db:seed', [
+        '--class' => 'VoyagerDummyDatabaseSeeder',
+      ]);
 
-          $this->call('migrate:fresh', [
-            '--seed' => true,
-          ]);
-          $this->call('db:seed', [
-            '--class' => 'VoyagerDatabaseSeeder',
-          ]);
-          $this->call('db:seed', [
-            '--class' => 'VoyagerDummyDatabaseSeeder',
-          ]);
-
-          $this->info('Dummy data installed.');
-        }
+      $this->info('Dummy data installed.');
     }
 }
