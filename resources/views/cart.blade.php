@@ -5,9 +5,6 @@
 @section('content')
 	<section id="cart_items">
 		<div class="container">
-
-
-
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
 				  <li><a href="/">Home</a></li>
@@ -15,14 +12,9 @@
 				</ol>
 			</div>
 
-
 			<div style="margin:10px;">
 				<a class="btn btn-default update" href="{{ route('cart.clear') }}">Clear Cart</a>
 			</div>
-
-
-
-
 
 			@include('partials.cart')
 	</section> <!--/#cart_items-->

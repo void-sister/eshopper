@@ -27,11 +27,11 @@
 						<input type="email" id="email" name="email" placeholder="Email Address" value="{{ old('email') }}">
 					@endif
 
-					<input type="text" id="name" name="name" placeholder="Name" value="{{ old('name') }}">
-					<input type="text" id="address" name="address" placeholder="Address" value="{{ old('address') }}">
-					<input type="text" id="city" name="city" placeholder="City" value="{{ old('city') }}">
+					<input type="text" id="name" name="name" placeholder="Name" value="{{ old('name', auth()->user()->name) }}">
+					<input type="text" id="address" name="address" placeholder="Address" value="{{ old('address', auth()->user()->address) }}">
+					<input type="text" id="city" name="city" placeholder="City" value="{{ old('city', auth()->user()->city) }}">
 					@include('partials.countries-list')
-					<input type="text" id="phone" name="phone" placeholder="Phone" value="{{ old('phone') }}">
+					<input type="text" id="phone" name="phone" placeholder="Phone" value="{{ old('phone', auth()->user()->phone) }}">
 
 					<p>Payment Details</p>
 
