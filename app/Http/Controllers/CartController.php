@@ -16,8 +16,6 @@ class CartController extends Controller
      */
     public function index()
     {
-      // $cart = \Cart::getContent();
-      // dd($cart);
       return view('cart');
     }
 
